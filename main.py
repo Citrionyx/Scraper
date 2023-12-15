@@ -1,3 +1,4 @@
+import asyncio
 import logging
 
 import uvicorn
@@ -5,6 +6,7 @@ from fastapi import FastAPI, Response
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from models import SearchQuery
+from scraper import scrape
 
 
 app = FastAPI()
@@ -39,6 +41,12 @@ async def read_root():
 @app.post("/scrape")
 async def scrape(sq: SearchQuery):
     return sq.search_query  # "pong"
+
+
+@app.get("/scrape")
+async def scrape():
+    response = await asyncio.gather(scrape("штангенциркуль"))
+    return response  # sq.search_query
 
 
 @app.get("/time", response_class=HTMLResponse)
