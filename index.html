@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script type="text/javascript">
+            function changeText(value) {
+                document.getElementById('sq').innerHTML = "Search query: " + value;
+            }
+        </script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Parser</title>
+    <link href="static/bootstrap-5.3.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+<div class="input-group mb-3 w-50">
+
+  <input type="text" class="form-control" placeholder="Поисковый запрос" aria-label="Recipient's username" aria-describedby="basic-addon2">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button">Найти</button>
+  </div>
+</div>
+  <p id="sq">Default text</p>
+  </body>
+    <script>
+          // get the search bar
+const input = document.querySelector('input')
+
+// get the button
+const button = document.querySelector('button')
+
+// set event listener
+button.addEventListener('click', () => {
+  // run ajax request
+  fetch("http://127.0.0.1:5005/scrape", {
+  method: "POST",
+  body: JSON.stringify({
+    search_query: input.value,
+    stores_to_scrape: ["marko", "polo"],
+  }),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8",
+  }
+})
+  .then((response) => response.json())
+  .then((response) => changeText(response));
+})
+    </script>
+</html>
