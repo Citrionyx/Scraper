@@ -1,4 +1,5 @@
 import asyncio
+import json
 import logging
 
 import uvicorn
@@ -6,7 +7,13 @@ from fastapi import FastAPI, Response
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from models import SearchQuery
-from scraper import scrape
+from scrapers.norgau import bulk_scrape
+from scrapers import norgau
+
+
+all_scrapers = [
+    norgau
+]
 
 
 app = FastAPI()
@@ -45,8 +52,17 @@ async def scrape(sq: SearchQuery):
 
 @app.get("/scrape")
 async def scrape():
-    response = await asyncio.gather(scrape("штангенциркуль"))
-    return response  # sq.search_query
+    async with asyncio.TaskGroup() as tg:
+        tasks = []
+        for scraper in all_scrapers:
+            task = tg.create_task(scraper.bulk_scrape("штангенциркуль"))
+            tasks.append(task)
+    response = await asyncio.gather(*tasks)
+    print(response)
+    return Response(
+        content=json.dumps(response, indent=4, ensure_ascii=False),
+        headers={'Content-type': 'application/json'}
+    )  # sq.search_query
 
 
 @app.get("/time", response_class=HTMLResponse)

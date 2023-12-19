@@ -17,4 +17,4 @@ async def scrape(query):
         return asyncio.gather(*tasks)
 
 
-print(asyncio.run(scrape("штангенциркуль")).result)
+print(asyncio.run(scrape("штангенциркуль")))

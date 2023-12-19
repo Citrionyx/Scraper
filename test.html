@@ -1,159 +1,102 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <script src="static/jquery.js"></script>
-    <meta charset="utf-8">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Table Sortable</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Test</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href=" ">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.1/bootstrap-table.min.js"></script>
-
-<!-- Latest compiled and minified Locales -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.13.1/locale/bootstrap-table-zh-CN.min.js"></script>
-  </head>
-  <style>.container {
-	width: 1024px;
-	padding: 2em;
-}
-
-.bold-blue {
-	font-weight: bold;
-	color: #0277BD;
-}</style>
-  <body>
-  <div class="container">
-
-
-<div id="toolbar">
-		<select class="form-control">
-				<option value="">Export Basic</option>
-				<option value="all">Export All</option>
-				<option value="selected">Export Selected</option>
-		</select>
-</div>
-
-<table id="table"
-			 data-toggle="table"
-			 data-search="true"
-			 data-filter-control="true"
-			 data-show-export="true"
-			 data-click-to-select="true"
-			 data-toolbar="#toolbar">
-	<thead>
-		<tr>
-			<th data-field="state" data-checkbox="true"></th>
-			<th data-field="prenom" data-filter-control="input" data-sortable="true">Prénom</th>
-			<th data-field="date" data-filter-control="select" data-sortable="true">Date</th>
-			<th data-field="examen" data-filter-control="select" data-sortable="true">Examen</th>
-			<th data-field="note" data-sortable="true">Note</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td class="bs-checkbox "><input data-index="0" name="btSelectItem" type="checkbox"></td>
-			<td>Valérie</td>
-			<td>01/09/2015</td>
-			<td>Français</td>
-			<td>12/20</td>
-		</tr>
-		<tr>
-			<td class="bs-checkbox "><input data-index="1" name="btSelectItem" type="checkbox"></td>
-			<td>Eric</td>
-			<td>05/09/2015</td>
-			<td>Philosophie</td>
-			<td>8/20</td>
-		</tr>
-		<tr>
-			<td class="bs-checkbox "><input data-index="2" name="btSelectItem" type="checkbox"></td>
-			<td>Valentin</td>
-			<td>05/09/2015</td>
-			<td>Philosophie</td>
-			<td>4/20</td>
-		</tr>
-		<tr>
-			<td class="bs-checkbox "><input data-index="3" name="btSelectItem" type="checkbox"></td>
-			<td>Valérie</td>
-			<td>05/09/2015</td>
-			<td>Philosophie</td>
-			<td>10/20</td>
-		</tr>
-		<tr>
-			<td class="bs-checkbox "><input data-index="4" name="btSelectItem" type="checkbox"></td>
-			<td>Eric</td>
-			<td>01/09/2015</td>
-			<td>Français</td>
-			<td>14/20</td>
-		</tr>
-		<tr>
-			<td class="bs-checkbox "><input data-index="5" name="btSelectItem" type="checkbox"></td>
-			<td>Valérie</td>
-			<td>07/09/2015</td>
-			<td>Mathématiques</td>
-			<td>19/20</td>
-		</tr>
-		<tr>
-			<td class="bs-checkbox "><input data-index="6" name="btSelectItem" type="checkbox"></td>
-			<td>Valentin</td>
-			<td>01/09/2015</td>
-			<td>Français</td>
-			<td>11/20</td>
-		</tr>
-		<tr>
-			<td class="bs-checkbox "><input data-index="7" name="btSelectItem" type="checkbox"></td>
-			<td>Eric</td>
-			<td>01/10/2015</td>
-			<td>Philosophie</td>
-			<td>8/20</td>
-		</tr>
-		<tr>
-			<td class="bs-checkbox "><input data-index="8" name="btSelectItem" type="checkbox"></td>
-			<td>Valentin</td>
-			<td>07/09/2015</td>
-			<td>Mathématiques</td>
-			<td>14/20</td>
-		</tr>
-		<tr>
-			<td class="bs-checkbox "><input data-index="9" name="btSelectItem" type="checkbox"></td>
-			<td>Valérie</td>
-			<td>01/10/2015</td>
-			<td>Philosophie</td>
-			<td>12/20</td>
-		</tr>
-		<tr>
-			<td class="bs-checkbox "><input data-index="10" name="btSelectItem" type="checkbox"></td>
-			<td>Eric</td>
-			<td>07/09/2015</td>
-			<td>Mathématiques</td>
-			<td>14/20</td>
-		</tr>
-		<tr>
-		<td class="bs-checkbox "><input data-index="11" name="btSelectItem" type="checkbox"></td>
-			<td>Valentin</td>
-			<td>01/10/2015</td>
-			<td>Philosophie</td>
-			<td>10/20</td>
-		</tr>
-	</tbody>
-</table>
-</div>
-  <script>//exporte les données sélectionnées
-var $table = $('#table');
-    $(function () {
-        $('#toolbar').find('select').change(function () {
-            $table.bootstrapTable('refreshOptions', {
-                exportDataType: $(this).val()
-            });
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/styles.css">
+    <script src="static/js/jquery.js"></script>
+</head>
+<body>
+    <div class="page-container">
+        <div class="container">
+            <h1 class="display-4">Table Sortable</h1>
+            <img width="200" height="200" src="https://norgau.com/upload/iblock/aee/pl2xu0h4kl95zbuzxmikwoszatkv6hox.jpeg" />
+            <div class="row mt-5 mb-3 align-items-center">
+                <div class="col-md-5">
+                    <button class="btn btn-primary btn-sm" id="refresh">Обновить</button>
+                </div>
+                <div class="col-md-3">
+                  <input type="text" class="form-control" placeholder="Search in table..." id="searchField">
+                </div>
+                <div class="col-md-2 text-right">
+                  <span class="pr-3">Rows Per Page:</span>
+                </div>
+                <div class="col-md-2">
+                    <div class="d-flex justify-content-end">
+                        <select class="custom-select" name="rowsPerPage" id="changeRows">
+                            <option value="10" selected>10</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                            <option value="150">150</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="root"></div>
+            <div class="mt-4">
+                <button class="btn btn-secondary" id="setPage2">Set Page 2</button>
+            </div>
+        </div>
+    </div>
+    <script src="static/test/data.js"></script>
+    <script src="static/js/table-sortable.js"></script>
+    <script>
+        var table = $('#root').tableSortable({
+            data: data,
+            columns: columns,
+            searchField: '#searchField',
+            responsive: {
+                1100: {
+                    columns: {
+                        formCode: 'Form Code',
+                        formName: 'Form Name',
+                    },
+                },
+                570: {
+                    columns: {
+                        formName: 'Form Name',
+                    },
+        }
+            },
+            rowsPerPage: 10,
+            pagination: true,
+            tableWillMount: function() {
+                console.log('table will mount')
+            },
+            tableDidMount: function() {
+                console.log('table did mount')
+            },
+            tableWillUpdate: function() {console.log('table will update')},
+            tableDidUpdate: function() {console.log('table did update')},
+            tableWillUnmount: function() {console.log('table will unmount')},
+            tableDidUnmount: function() {console.log('table did unmount')},
+            onPaginationChange: function(nextPage, setPage) {
+                setPage(nextPage);
+            }
         });
-    })
 
-		var trBoldBlue = $("table");
+        $('#changeRows').on('change', function() {
+            table.updateRowsPerPage(parseInt($(this).val(), 10));
+        })
 
-	$(trBoldBlue).on("click", "tr", function (){
-			$(this).toggleClass("bold-blue");
-	});</script>
-  </body>
+        $('#rerender').click(function() {
+            table.refresh(true);
+        })
 
+        $('#distory').click(function() {
+            table.distroy();
+        })
+
+        $('#refresh').click(function() {
+            table.refresh();
+        })
+
+        $('#setPage2').click(function() {
+            table.setPage(1);
+        })
+    </script>
+</body>
 </html>
